@@ -1,0 +1,29 @@
+{
+  "name": "DesempregadoBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "env-cmd -f ./config/dev.env nodemon src/index.js",
+    "cheerio": "nodemon src/pages/indeed.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.2.1",
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "lodash": "^4.17.19",
+    "nodemon": "^2.0.4",
+    "puppeteer": "^4.0.1",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "telegraf": "^3.38.0",
+    "telegraf-inline-menu": "^5.0.0",
+    "tinyurl": "^1.1.6"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
+  }
+}
