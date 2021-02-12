@@ -1,7 +1,17 @@
 use thirtyfour::prelude::*;
 use mini_redis::{ client, Result };
+use std::fmt;
+
 use tokio;
 mod pages;
+
+struct IndeedJob {
+    title: String,
+    company: String,
+    place: String,
+    date: String,
+    
+}
 
 #[tokio::main]
 async fn main() -> color_eyre::Result<()> {
@@ -18,11 +28,45 @@ async fn main() -> color_eyre::Result<()> {
     let jobs = page.find_elements(By::ClassName("jobsearch-SerpJobCard")).await?;
 
     for job in jobs {
-        println!("{:?}\n", job);
+        let title = job
+            .find_element(By::ClassName("jobtitle"))
+            .await?
+            .get_attribute("title")
+            .await?
+            .unwrap();
+
+        let company = job
+            .find_element(By::ClassName("company"))
+            .await?
+            .text()
+            .await?;
+
+        let place = job
+            .find_element(By::ClassName("location"))
+            .await?
+            .text()
+            .await?;
+
+        let date = job
+            .find_element(By::ClassName("date"))
+            .await?
+            .text()
+            .await?;
+
+        let link = job
+        .find_element(By::ClassName("jobtitle"))
+        .await?
+        .get_attribute("href")
+        .await?
+        .unwrap();
+
+        //SOme and None
+        // let salary = job
+        // .find_element(By::ClassName("salaryText"))
+        // .await?
+        // .text()
+        // .await?;
     }
-
-    //let jobs = tab.find_elements(".jobsearch-SerpJobCard");
-
     
     Ok(())
 }
